@@ -248,12 +248,12 @@
 	
 	<div style="position:absolute;overflow:auto;width:80%;height:90%;left:10%;top:5%">
 		<img src="images/lagartija1.png" ><br>
-		<b>Onde você conseguiu tocar mais: na cauda ou no corpo?</b><br>
-		Em geral, as pessoas acertam mais nas caudas quando a cor delas é bem diferente da cor do corpo. Mas será que isso também acontece com os predadores dos lagartos?<br>
+		<b>Where did you manage to touch most: on the tail or on the body?</b><br>
+In general, people hit their tails more when their color is very different from their body color. But does this also happen to predators of lizards? <br>
  
-É possível que a diferença de cor entre o corpo e a cauda seja uma forma de defesa desses lagartos: uma cauda bem colorida pode chamar a atenção do seu predador para ela. Assim, a cabeça e o corpo, onde estão órgãos muito importantes para o lagarto, seriam menos atacados por predadores que usam a visão para caçar.<br>
+It is possible that the color difference between the body and the tail is a form of defense for these lizards: a very colorful tail can draw the attention of your predator to it. Thus, the head and body, where organs are very important for the lizard, would be less attacked by predators that use their sight to hunt.
  
-Lagartos que têm caudas mais contrastantes teriam, então, mais chance de sobreviver e se reproduzir. Isso sugere que predadores orientados pela visão influenciam a variação de colorido da cauda entre os lagartos de uma mesma espécie que vivem em uma mesma área. 
+Lizards that have more contrasting tails would then have a better chance of surviving and reproducing. This suggests that vision-oriented predators influence tail color variation among lizards of the same species that live in the same area. 
 
 
 	</div>
@@ -297,7 +297,7 @@ Solet nostrud ex cum, ne suas adhuc definitiones cum, vix ea affert nostro propr
     <div id="p_instructions" class="pt-page">		 
 		<div class="navButton"  style="position:absolute; top:45%;right:2%;font-size:34px;"><a href="#" 
 		onclick="gotoHome('t_left');" class="lizard_float_button"><span  data-icon="&#xe004;"></span></a></div>
-		<h1 class="mainTitle">Como jogar</h1>
+		<h1 class="mainTitle">How to play</h1>
 		<img  src="images\instructions.svg" style="max-width:100%;max-height=70%;">
 	</div>
 	
@@ -305,15 +305,15 @@ Solet nostrud ex cum, ne suas adhuc definitiones cum, vix ea affert nostro propr
 	<div class="navButton"  style="position:absolute; top:45%;left:2%;font-size:34px;"><a href="#" 
 	onclick="gotoHome('t_right');" class="lizard_float_button"><span  data-icon="&#xe003;"></span></a></div>		
 	<div style="position:absolute;width:70%;height:90%;left:15%;top:5%">
-			<h1 class="mainTitle">Contagem</h1>
+			<h1 class="mainTitle">Positions</h1>
 			<div style="text-aling:center;">
 				<table class="cssresult" id="results">
 				<thead>
 					<tr>
-						<th>Posição</th>
-						<th>Jogador</th>
+						<th>Position</th>
+						<th>Player</th>
 						<th></th>
-						<th>Pontos</th>
+						<th>Points</th>
 					</tr>
 				</thead>
 				</table>
@@ -323,7 +323,7 @@ Solet nostrud ex cum, ne suas adhuc definitiones cum, vix ea affert nostro propr
 	
     <div id="p_menu" class="pt-page  pt-page-current ">
 	<br>
-	<div class="mainTitle">Você é um bom predador?</div><br>
+	<div class="mainTitle">Are you a good predator?</div><br>
 		<div  id="canvasContainer" class="centered w_h_400" style="text-align:center; z-index:2;margin: auto;">
 			 
 		<div style="width:100%;height:100%;position:relative;">
@@ -360,7 +360,7 @@ Solet nostrud ex cum, ne suas adhuc definitiones cum, vix ea affert nostro propr
 
 <div id="start" class="modalDialog">
 	<div class="centered w_h_400" style="text-align:center">
-		<h2>Jogo <span>Lagarto</span></h2>
+		<h2>Lizard<span>Game</span></h2>
 		<div class="normalB "><a href="#" style="background-color:brown" class="roundAnchor fs " 
 					onclick="startGame()" ><span  data-icon="&#xe00c;"></span></a><a href="#" class="roundAnchor roundAnchorSmall fs " 
 					onclick="gotoHome('t_cube_bottom')" ><span  data-icon="&#xe009;"></span></a></div>
@@ -370,7 +370,7 @@ Solet nostrud ex cum, ne suas adhuc definitiones cum, vix ea affert nostro propr
 <div id="end" class="modalDialog">
 	<div class="centered w_h_450" style="text-align:center">
 		<h2 id="pts">12 pts</h2>
-		<h2 id="position">Posição</h2>
+		<h2 id="position">Position</h2>
 		<div class="normalB "><a href="#"  style="background-color:brown" class="roundAnchor fs" 
 					onclick="startGame()" ><span  data-icon="&#xe007;"></span></a><a href="#" class="roundAnchor roundAnchorSmall fs" 
 					onclick="showRegResult()" ><span  data-icon="&#xe008;"></span></a><a href="#" class="roundAnchor roundAnchorSmall fs" 
@@ -381,7 +381,7 @@ Solet nostrud ex cum, ne suas adhuc definitiones cum, vix ea affert nostro propr
 <div id="registerResult" class="modalDialog">
 	<div class="centered w_h_450" style="text-align:center">
 		<h2 id="pts_save">2 pts</h2>
-		<h2 id="position2">Posição</h2>
+		<h2 id="position2">Position</h2>
 		<div><label id="labelPlayer">nome:</label> <input class="inputLizard" id="player" maxlength="10" type="text"></div>
 		<div>
 				<div class="normalB ">
@@ -467,11 +467,11 @@ Solet nostrud ex cum, ne suas adhuc definitiones cum, vix ea affert nostro propr
 </tr>
 <tr>
 	<td><input id="maxLizards" type="text" maxlength="3" style="width:40px"></td>
-	<td><button onclick="changeMaxLizards();">num.lagartos</button></td>
+	<td><button onclick="changeMaxLizards();">num.lizards</button></td>
 </tr>
 <tr>
 	<td></td>
-	<td ><button onclick="resetResultados();">reset Contagen</button></td>
+	<td ><button onclick="resetResultados();">reset Count</button></td>
 </tr>
 </table>
 </td></tr></table>
