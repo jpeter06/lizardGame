@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
    xmlns:cc="http://creativecommons.org/ns#"
@@ -14,7 +12,7 @@
    width="800"
    height="600"
    id="svg4108"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="1.0.1 (3bc2e813f5, 2020-09-07)"
    sodipodi:docname="instructions.svg">
   <sodipodi:namedview
      pagecolor="#ffffff"
@@ -25,17 +23,18 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="1039"
-     inkscape:window-height="731"
+     inkscape:window-width="1920"
+     inkscape:window-height="1013"
      id="namedview3028"
      showgrid="false"
      inkscape:zoom="0.78666667"
      inkscape:cx="359.01588"
      inkscape:cy="302.69737"
-     inkscape:window-x="0"
-     inkscape:window-y="0"
-     inkscape:window-maximized="0"
-     inkscape:current-layer="svg4108" />
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4108"
+     inkscape:document-rotation="0" />
   <defs
      id="defs4110">
     <inkscape:path-effect
@@ -153,39 +152,29 @@
      id="path3004-1"
      d="m 607.99088,593.86674 c 19.46526,0.17492 63.21559,-21.49395 68.99199,-40.11773 5.77641,-18.62379 8.7273,-28.60203 9.69099,-42.95446 0.23155,-12.65373 3.46955,-24.29687 2.2875,-36.81975 -1.38186,-11.03016 -3.81735,-31.79134 -1.2799,-47.12408 -2.30022,-13.22049 -9.70667,-25.54322 -14.39558,-38.4038 -6.36168,-15.0108 -15.8615,-20.06705 -30.78069,-25.35551 -16.55528,-3.56789 -26.43858,11.34725 -17.67591,17.06896 4.58654,5.9691 4.34168,5.48183 2.1558,2.64855 -9.95164,-12.05089 -15.89661,-18.4991 -31.40634,-23.30617 -6.43018,-0.56348 -12.31234,-1.32599 -21.52819,2.6035 -8.97583,6.8909 -5.80831,7.51545 5.46156,20.80419 -11.89389,-10.96937 -11.99309,-21.51266 -28.44747,-27.1273 -11.644,-3.22601 -31.49024,-4.73923 -37.91458,8.88312 -2.81559,7.75151 9.2765,19.06248 15.39629,29.95344 -9.25477,-12.30148 -16.46818,-25.8601 -24.43832,-39.74713 -12.12121,-13.95086 -17.13511,-27.26635 -24.1869,-41.45125 -11.69562,-25.05333 -20.37631,-36.14093 -37.05361,-21.80836 -5.61562,4.44391 1.09221,27.26839 4.48962,40.95656 5.47203,14.91428 13.30617,30.02169 16.86785,45.67436 6.44197,14.50681 10.82168,24.68827 18.67162,38.26711 3.4749,7.81924 15.9701,20.2834 18.88991,33.3735 2.62316,7.6162 -2.89681,-11.38867 -8.60602,-17.37525 -2.28727,-3.7044 -7.83676,-11.58687 -8.15323,-12.10246 -0.91536,-1.80684 -2.72723,2.7628 -1.18173,9.31442 2.86589,16.13931 12.06268,31.00885 10.19718,47.85131 -2.96069,23.75384 1.02009,24.63345 20.79325,46.24257 13.22238,13.18955 13.17681,34.21818 25.3791,47.76804 14.124,15.68383 45.2065,22.41325 67.79684,22.2344" />
   <text
-     sodipodi:linespacing="125%"
-     style="font-size:43.33014679px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans;-inkscape-font-specification:Sans"
+     style="font-style:normal;font-weight:normal;font-size:43.3301px;line-height:0%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
      xml:space="preserve"
      id="text3905"
-     transform="matrix(0.9886755,0.15006914,-0.15006914,0.9886755,104.6719,-60.31916)"><textPath
+     transform="rotate(8.6309334,452.00254,663.38221)"><textPath
        id="textPath4944"
-       xlink:href="#path4937"><tspan
-   style="font-size:43.33014679px;font-weight:normal;-inkscape-font-specification:Sans"
-   id="tspan3907">Toque no lagarto para capturá-lo.</tspan><tspan
-   style="font-size:43.33014679px;font-weight:normal;-inkscape-font-specification:Sans"
-   id="tspan3909" /><tspan
-   style="font-size:43.33014679px;font-weight:normal;-inkscape-font-specification:Sans"
-   id="tspan3911" /></textPath></text>
+       xlink:href="#path4937"
+       style="font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:43.33010101px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;">Instructions:</textPath></text>
   <text
-     sodipodi:linespacing="125%"
-     style="font-size:42.2597847px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     style="font-style:normal;font-weight:normal;font-size:42.2598px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:'sans-serif, Normal';font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
      xml:space="preserve"
      id="text3993"
-     transform="matrix(0.9886755,0.15006914,-0.15006914,0.9886755,104.6719,-60.31916)"><textPath
+     transform="rotate(8.6309334,452.00254,663.38221)"><textPath
        id="textPath4996"
-       xlink:href="#path4937-5-7"><tspan
-   style="font-size:42.2597847px"
-   id="tspan3995">  * toque no corpo: 1.0 ponto</tspan></textPath></text>
+       xlink:href="#path4937-5-7"
+       style="font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:42.25979996px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;">  * Hit on the body: 1 point</textPath></text>
   <text
-     sodipodi:linespacing="125%"
-     style="font-size:43.58099365px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
+     style="font-style:normal;font-weight:normal;font-size:43.581px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;-inkscape-font-specification:'sans-serif, Normal';font-stretch:normal;font-variant:normal;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;"
      xml:space="preserve"
      id="text3997"
-     transform="matrix(0.9886755,0.15006914,-0.15006914,0.9886755,104.6719,-60.31916)"><textPath
+     transform="rotate(8.6309334,452.00254,663.38221)"><textPath
        id="textPath4971"
-       xlink:href="#path4937-5"><tspan
-   style="font-size:43.58099365px"
-   id="tspan3999">  * toque na cauda: 0.5 ponto</tspan></textPath></text>
+       xlink:href="#path4937-5"
+       style="font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';font-weight:normal;font-style:normal;font-stretch:normal;font-variant:normal;font-size:43.58100128px;font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;">  * Hit on the tail: 0.5 points</textPath></text>
   <path
      inkscape:connector-curvature="0"
      style="fill:none;stroke:#000000;stroke-width:1.08719862px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:0"
