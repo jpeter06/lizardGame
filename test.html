@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href="icons.css" rel="stylesheet" type="text/css">
+<link href="lizard.css" rel="stylesheet" type="text/css">
+<link href="main.css" rel="stylesheet" type="text/css">
+<style>
+
+    body{
+		background: radial-gradient(ellipse at center, #aad429 0%,#2d9119 100%);
+	}
+
+</style>
+<script type="text/javascript" src="utils.js"></script>
+<script type="text/javascript" src="lizard.js"></script>
+<script>
+var lizardMain=new Lizard(0.2,200,'orange','orange');
+
+(function animMainloop(){
+	  requestAnimFrame(animMainloop);
+	  renderMain();
+})();
+
+var inited=false;
+function init(){
+inited=true;
+alert(screen.width);
+}
+
+function renderMain(){
+	if(!inited) 
+		return;
+	//drawLizard
+	var move=0;
+	var canvas=document.getElementById("cvMain");
+	var dimX=canvas.width;
+	var dimY=canvas.height;
+	var ctx=canvas.getContext("2d");
+	ctx.clearRect(0,0,dimX,dimY);
+	ctx.save();
+	drawCircle(ctx,dimX*0.5,dimY*0.5,dimX*0.5-1,'#125809',0,'#125809');
+	ctx.clip();
+	ctx.translate(dimX*0.5,dimY*0.5); //move to the center
+	ctx.rotate(-45*Math.PI/180);
+	//if(action==1){move+=speed*lizard.longBody2*0.08; move=move>dimX?-dimX:move;};
+	//if(action==0) { move=0;}
+	ctx.translate(0,-move);
+	lizardMain.animLizard();
+	lizardMain.touchAndDrawMain(ctx,false,null);
+	lizardMain.touchAndDrawTail(ctx,false,null);
+	ctx.restore();
+}
+
+function drawCircle(ctx,centerX, centerY,radius,color,lineWidth,bg){
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+      ctx.fillStyle = color;
+      ctx.fill();
+      ctx.lineWidth = lineWidth;
+      ctx.strokeStyle = bg;
+      ctx.stroke();
+}
+</script>
+</head>
+<body onload="init();">
+<div class="mainTitle2"><span>jogo</span>
+			  Lagarto</div>
+<div class="centeredMain">
+
+<div style="width:100%;height:100%;position:relative;">
+<canvas id="cvMain" width="300" height="300" style="position:absolute;left:50px;top:50px"></canvas>
+	<div class="topC ">
+	<a href="#" class="roundAnchor fs" 
+				onclick="transitions.gotoPage('p_info1','t_bottom',null);" ><span  data-icon="&#xe010;"></span></a>
+	</div>
+	<div class="leftVC "><a href="#" class="roundAnchor fs centerUp" onclick="transitions.gotoPage('p_instructions','t_right',null);" ><span  data-icon="&#xe00f;"></span></a></div>
+	<div class="rightVC "><a href="#" class="roundAnchor fs centerUp" onclick="transitions.gotoPage('p_results','t_left',null);" ><span  data-icon="&#xe005;"></span></a></div>
+	<div class="bottomC "><a href="#" class="roundAnchor fs" 
+					onclick="gotoGame()" ><span  data-icon="&#xe00c;"></span></a></div>
+</div>
+</div>
+</body>
+</html>

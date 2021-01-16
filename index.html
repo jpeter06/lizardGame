@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html >
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta http-equiv="x-ua-compatible" content="IE=edge" /> <!--temporarily force standards mode in IE -->
+	<title>lizardGame</title>
+	<!-- Home screen icons -->
+	<link rel="apple-touch-icon" sizes="57x57" href="lizard_57.png" />
+	<link rel="apple-touch-icon" sizes="72x72" href="lizard_72.png" />
+	<link rel="apple-touch-icon" sizes="114x114" href="lizard_114.png" />
+<!--
+	<link href="http://fonts.googleapis.com/css?family=Rancho" rel="stylesheet" type="text/css">
+	<link href="http://fonts.googleapis.com/css?family=Gudea" rel="stylesheet" type="text/css">
+-->	
+	<link href="icons.css" rel="stylesheet" type="text/css">
+	<link href="lizard.css" rel="stylesheet" type="text/css">
+	<link href="main.css" rel="stylesheet" type="text/css">
+	<link href="transitions.css" rel="stylesheet" type="text/css">
+	<link rel="stylesheet" type="text/css" media="only screen and (max-width: 480px), only screen and (max-device-width: 480px)" href="media.css" />
+	
+	<style rel="stylesheet" type="text/css" media="only screen and (max-height: 480px), only screen and (max-device-height: 480px)" >
+	.mainTitle { float:left;margin-left:60px;}
+	#canvasContainer { float:left; margin-top:10px;}
+		.w_h_400 {
+		height: 350px;
+		width: 350px;
+	}
+
+	.info{
+		font-size: 14px;
+	}
+	#cvMain{
+		height: 300px;
+		width: 300px;
+		left:25px;
+		top:25px;
+	}
+	.mainTitle{
+		font-size: 69px;
+	}
+	</style>
+	
+	<script type="text/javascript" src="transitions.js"></script>
+	
+	<script type="text/javascript" src="utils.js"></script>
+	<script type="text/javascript" src="lizard.js"></script>
+	<script type="text/javascript" src="game.js"></script>
+	<script type="text/javascript" src="store.js"></script>
+	<script>
+		var inited=false;
+		function init(){
+			inited=true;
+			var c = document.getElementById('cvMain');
+			var cont=document.getElementById('canvasContainer');
+			
+			//c.width=(cont.offsetWidth==400?300:250);
+			//c.height=(cont.offsetWidth==400?300:250);
+			game.init();
+			writeToResults(game.getResults());
+			game.setEndF(endGame);
+		}
+		
+		function gotoHome(transition){
+			hideAllModal();			
+			transitions.gotoPage("p_menu",transition,null);
+		}
+		
+		function gotoHomeFromGame(transition){
+			hideAllModal();
+			game.stopGame();
+			document.getElementById("goHomeFromGame").style.display='none';
+			transitions.gotoPage("p_menu",transition,null);
+		}
+		
+		
+		
+		function hideAllModal(){
+			var modalP=document.getElementsByClassName('modalDialogShow');
+			for(var i=0;i<modalP.length;i++)
+				removeClass(modalP[i].id,'modalDialogShow');
+		}
+		
+		function gotoGame(){
+			transitions.gotoPage("p_game",'t_cube_top',
+			function(){addClass("start","modalDialogShow");});
+		}
+		function endGotoGame(){
+			addClass("start","modalDialogShow");
+		}
+		
+		function startGame(){
+			hideAllModal();
+			game.restart();
+			document.getElementById("goHomeFromGame").style.display='block';
+		}
+		
+		function endGame(){
+			var strPts=game.points+" pts";
+			//&#xe00a; &#xe00d; &#xe00b;
+			var pos=game.getPosition();
+			var strPos=pos+" Posição"+
+			(pos==1?" <span  data-icon='&#xe00d;'></span>":"")+
+			(pos==2 || pos==3?" <span  data-icon='&#xe00a;'></span>":"")+
+			(pos>3?" <span  data-icon='&#xe00b;'></span>":"");
+			document.getElementById('pts').innerHTML=strPts;
+			document.getElementById('pts_save').innerHTML=strPts;
+			document.getElementById('position').innerHTML=strPos;
+			document.getElementById('position2').innerHTML=strPos;
+			addClass("end","modalDialogShow");
+			document.getElementById("goHomeFromGame").style.display='none';
+		}
+		
+		function showRegResult(){
+			hideAllModal();
+			addClass("registerResult","modalDialogShow");
+		}
+		
+		function cancelRegResult(){
+			hideAllModal();
+			addClass("end","modalDialogShow");
+		}
+		
+		function saveAndGoToResults(){
+			var name=document.getElementById('player').value;
+			if(name.trim()=="") return;
+			hideAllModal();
+			game.saveResult(name);
+			writeToResults(game.getResults(),game.getLastResultPos(),game.getLastResultInfo());
+			transitions.gotoPage('p_results','t_left',null);
+		}
+		
+
+		
+		function writeToResults(list,lastPos,lastResultInfo){
+			var table=document.getElementById('results');
+			while(table.rows.length>1)
+				table.deleteRow(table.rows.length-1);
+			var mIni=" <span style='text-shadow:1px 1px 1px #666'  class='";
+			var mEnd="' data-icon='&#xe005;' ></span>";
+			var colors=["f_gold","f_silver","f_bronce"];
+			var max=5;
+			for(var i=0; i<max;i++){
+				var row = table.insertRow(table.rows.length);
+				var c1=row.insertCell(0);
+				var c2=row.insertCell(1);
+				var c3=row.insertCell(2);
+				var c4=row.insertCell(3);
+				c1.innerHTML=i+1;
+				if(i<list.length){
+					c4.innerHTML=list[i].points;
+					c2.innerHTML=list[i].name;
+					if(i<3)
+						c3.innerHTML=mIni+colors[i]+mEnd;
+					if(lastPos>=max){
+						if(i==max-2){
+							c1.innerHTML="...";
+							c2.innerHTML="...";
+							c4.innerHTML="...";
+						}
+						if(i==max-1){
+							c4.innerHTML=lastResultInfo.points;
+							c2.innerHTML=lastResultInfo.name;
+							c1.innerHTML=lastPos;
+						}
+					}
+				} else{
+					c1.innerHTML="...";
+					c2.innerHTML="...";
+					c4.innerHTML="...";
+				}
+					
+			}
+		}
+		
+		function stopScrolling( touchEvent ) { touchEvent.preventDefault(); }
+		
+		function notify(evt){alert(evt.target.id)}
+	</script>
+	
+	<script>
+	var lizardMain=new Lizard(0.4,200,'orange','orange');
+
+	(function animMainloop(){
+		  requestAnimFrame(animMainloop);
+		  renderMain();
+	})();
+
+	function renderMain(){
+		if(!inited || !document.getElementById('p_menu').classList.contains('pt-page-current')) 
+			return;
+
+		//drawLizard
+		var move=0;
+		var canvas=document.getElementById("cvMain");
+		var dimX=canvas.width;
+		var dimY=canvas.height;
+		//console.log(canvas.height+" "+canvas.width);
+		var ctx=canvas.getContext("2d");
+		ctx.clearRect(0,0,dimX,dimY);
+		ctx.save();
+		drawCircleMain(ctx,dimX*0.5,dimY*0.5,dimX*0.5-1,'#125809',0,'#125809');
+		ctx.clip();
+		ctx.translate(dimX*0.5,dimY*0.5); //move to the center
+		ctx.rotate(-45*Math.PI/180);
+		//if(action==1){move+=speed*lizard.longBody2*0.08; move=move>dimX?-dimX:move;};
+		//if(action==0) { move=0;}
+		ctx.translate(0,-move);
+		lizardMain.animLizard();
+		lizardMain.touchAndDrawMain(ctx,false,null);
+		lizardMain.touchAndDrawTail(ctx,false,null);
+		ctx.restore();
+	}
+
+	function drawCircleMain(ctx,centerX, centerY,radius,color,lineWidth,bg){
+		ctx.beginPath();
+		ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+		ctx.clip();
+		ctx.beginPath();
+		ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+		ctx.fillStyle = color;
+		//ctx.shadowColor = '#000';
+		//  ctx.shadowBlur = 4;
+		//  ctx.shadowOffsetX = 0;
+		//  ctx.shadowOffsetY = 0;
+		ctx.fill();
+		ctx.lineWidth = lineWidth;
+		ctx.strokeStyle = bg;
+		ctx.stroke();
+	}
+	</script>
+</head>
+
+<body onload="init();">
+<div id="pt-main" class="pt-perspective">
+
+    <div id="p_info1" class="pt-page    info">
+	<div class="navButton"  style="position:absolute; top:2%;right:2%;font-size:34px;"><a href="#" 
+	onclick="gotoHome('t_top')" class="lizard_float_button"><span  data-icon="&#xe009;"></span></a></div>
+	<!--
+	<div class="navButton"  style="position:absolute; top:45%;right:2%;font-size:34px;"><a href="#" 
+	onclick="transitions.gotoPage('p_info2','t_left',null);" class="lizard_float_button"><span  data-icon="&#xe004;"></span></a></div>
+	-->
+	<div class="navButton"  style="position:absolute; bottom:0%;right:45%;font-size:34px;"><a href="#" 
+	onclick="gotoHome('t_top')" class="lizard_float_button"><span  data-icon="&#xe002;"></span></a></div>
+	
+	<div style="position:absolute;overflow:auto;width:80%;height:90%;left:10%;top:5%">
+		<img src="images/lagartija1.png" ><br>
+		<b>Onde você conseguiu tocar mais: na cauda ou no corpo?</b><br>
+		Em geral, as pessoas acertam mais nas caudas quando a cor delas é bem diferente da cor do corpo. Mas será que isso também acontece com os predadores dos lagartos?<br>
+ 
+É possível que a diferença de cor entre o corpo e a cauda seja uma forma de defesa desses lagartos: uma cauda bem colorida pode chamar a atenção do seu predador para ela. Assim, a cabeça e o corpo, onde estão órgãos muito importantes para o lagarto, seriam menos atacados por predadores que usam a visão para caçar.<br>
+ 
+Lagartos que têm caudas mais contrastantes teriam, então, mais chance de sobreviver e se reproduzir. Isso sugere que predadores orientados pela visão influenciam a variação de colorido da cauda entre os lagartos de uma mesma espécie que vivem em uma mesma área. 
+
+
+	</div>
+	
+    </div>
+	
+    <div id="p_info2" class="pt-page   info">
+	<div class="navButton" style="position:absolute; top:2%;right:2%;font-size:34px;"><a href="#" 
+	onclick="gotoHome('t_top')" class="lizard_float_button"><span  data-icon="&#xe009;"></span></a></div>
+	<div class="navButton"  style="position:absolute; top:45%;right:2%;font-size:34px;"><a href="#" 
+	onclick="transitions.gotoPage('p_info3','t_left',null);" class="lizard_float_button"><span  data-icon="&#xe004;"></span></a></div>
+	<div class="navButton"  style="position:absolute; top:45%;left:2%;font-size:34px;"><a href="#" 
+	onclick="transitions.gotoPage('p_info1','t_right',null);" class="lizard_float_button"><span  data-icon="&#xe003;"></span></a></div>
+		<div class="navButton"  style="position:absolute; bottom:0%;right:45%;font-size:34px;"><a href="#" 
+	onclick="gotoHome('t_top')" class="lizard_float_button"><span  data-icon="&#xe002;"></span></a></div>
+	<div style="position:absolute;overflow:auto;width:80%;height:86%;left:10%;top:3%">
+		 Nec cu adhuc mollis graecis, in ius utamur intellegebat, et sumo volumus elaboraret nec. Ut vix utroque epicuri. His tollit vocent prodesset in. Homero labitur adipisci ad eam. Nam novum mundi laoreet ad, id eum quas possit repudiare. Te mel diam facete nostrud, no suas duis aliquid pri.
+
+Pri cu atqui choro delicata. Dictas scripta et eam. Ius dico dissentiet cu. Sea ancillae abhorreant liberavisse ne, id honestatis scripserit mea. Adhuc debet invenire cum et, his perfecto intellegam ei, id malorum probatus ius. Mei quod audiam ei. Ne tantas impetus contentiones vix, cu per solum patrioque.
+
+Solet nostrud ex cum, ne suas adhuc definitiones cum, vix ea affert nostro propriae. Similique consetetur argumentum pri no, persecuti voluptatibus definitionem vis ut, dicta democritum nec no. Vel tempor prompta posidonium ei. Ludus impetus te cum, magna illum oblique id vis, ne mea alia habeo. Veri vivendo antiopam eu sit.
+	</div>
+    </div>
+	
+    <div id="p_info3" class="pt-page info">
+	<div class="navButton"  style="position:absolute; top:2%;right:2%;font-size:34px;"><a href="#" 
+	onclick="gotoHome('t_top')" class="lizard_float_button"><span  data-icon="&#xe009;"></span></a></div>
+	<div class="navButton"  style="position:absolute; top:45%;left:2%;font-size:34px;"><a href="#" 
+	onclick="transitions.gotoPage('p_info2','t_right',null);" class="lizard_float_button"><span  data-icon="&#xe003;"></span></a></div>
+		<div class="navButton"  style="position:absolute; bottom:0%;right:45%;font-size:34px;"><a href="#" 
+	onclick="gotoHome('t_top')" class="lizard_float_button"><span  data-icon="&#xe002;"></span></a></div>
+	<div style="position:absolute;overflow:auto;width:80%;height:90%;left:10%;top:5%">
+		 Nec cu adhuc mollis graecis, in ius utamur intellegebat, et sumo volumus elaboraret nec. Ut vix utroque epicuri. His tollit vocent prodesset in. Homero labitur adipisci ad eam. Nam novum mundi laoreet ad, id eum quas possit repudiare. Te mel diam facete nostrud, no suas duis aliquid pri.
+
+Pri cu atqui choro delicata. Dictas scripta et eam. Ius dico dissentiet cu. Sea ancillae abhorreant liberavisse ne, id honestatis scripserit mea. Adhuc debet invenire cum et, his perfecto intellegam ei, id malorum probatus ius. Mei quod audiam ei. Ne tantas impetus contentiones vix, cu per solum patrioque.
+
+Solet nostrud ex cum, ne suas adhuc definitiones cum, vix ea affert nostro propriae. Similique consetetur argumentum pri no, persecuti voluptatibus definitionem vis ut, dicta democritum nec no. Vel tempor prompta posidonium ei. Ludus impetus te cum, magna illum oblique id vis, ne mea alia habeo. Veri vivendo antiopam eu sit.
+    </div>
+	</div>
+	
+    <div id="p_instructions" class="pt-page">		 
+		<div class="navButton"  style="position:absolute; top:45%;right:2%;font-size:34px;"><a href="#" 
+		onclick="gotoHome('t_left');" class="lizard_float_button"><span  data-icon="&#xe004;"></span></a></div>
+		<h1 class="mainTitle">Como jogar</h1>
+		<img  src="images\instructions.svg" style="max-width:100%;max-height=70%;">
+	</div>
+	
+    <div id="p_results" class="pt-page">
+	<div class="navButton"  style="position:absolute; top:45%;left:2%;font-size:34px;"><a href="#" 
+	onclick="gotoHome('t_right');" class="lizard_float_button"><span  data-icon="&#xe003;"></span></a></div>		
+	<div style="position:absolute;width:70%;height:90%;left:15%;top:5%">
+			<h1 class="mainTitle">Contagem</h1>
+			<div style="text-aling:center;">
+				<table class="cssresult" id="results">
+				<thead>
+					<tr>
+						<th>Posição</th>
+						<th>Jogador</th>
+						<th></th>
+						<th>Pontos</th>
+					</tr>
+				</thead>
+				</table>
+			</div>
+		</div>
+	</div>
+	
+    <div id="p_menu" class="pt-page  pt-page-current ">
+	<br>
+	<div class="mainTitle">Você é um bom predador?</div><br>
+		<div  id="canvasContainer" class="centered w_h_400" style="text-align:center; z-index:2;margin: auto;">
+			 
+		<div style="width:100%;height:100%;position:relative;">
+		<canvas id="cvMain" width="300px" height="300px" style="position:absolute;"></canvas>
+
+			<a href="#" class="roundAnchor nfs roundAnchorSmall" style="top: 155px;left:18px;" onclick="transitions.gotoPage('p_instructions','t_right',null);" ><span  data-icon="&#xe00f;"></span></a>
+			<a href="#" class="roundAnchor nfs " style="top: 65px;left: 30px;background-color:brown"
+							onclick="gotoGame()" ><span  data-icon="&#xe00c;"></span></a>
+			<a href="#" class="roundAnchor nfs roundAnchorMedium" style="top: 18px;left: 108px;"			onclick="transitions.gotoPage('p_info1','t_bottom',null);" ><span  data-icon="&#xe010;"></span></a>
+			<a href="#" class="roundAnchor nfs roundAnchorSmall" style="left: 190px;top: 16px;" onclick="transitions.gotoPage('p_results','t_left',null);" ><span  data-icon="&#xe005;"></span></a>
+			<!--<div class="topC ">
+			<a href="#" class="roundAnchor fs" 
+						onclick="transitions.gotoPage('p_info1','t_bottom',null);" ><span  data-icon="&#xe010;"></span></a>
+			</div>
+			<div class="leftVC "><a href="#" class="roundAnchor fs centerUp" onclick="transitions.gotoPage('p_instructions','t_right',null);" ><span  data-icon="&#xe00f;"></span></a></div>
+			<div class="rightVC "><a href="#" class="roundAnchor fs centerUp" onclick="transitions.gotoPage('p_results','t_left',null);" ><span  data-icon="&#xe005;"></span></a></div>
+			<div class="bottomC "><a href="#" class="roundAnchor fs" 
+							onclick="gotoGame()" ><span  data-icon="&#xe00c;"></span></a></div>
+							-->
+		</div>
+			
+		</div>
+		<img style="position:absolute;left:0;bottom:0;" src="images\esquina_inf_izq2.svg" width="70%">
+    </div>
+	
+	<div id="p_game"  class="pt-page " >
+	<div class="navButton" id="goHomeFromGame" style="display:none;position:absolute; top:2%;right:2%;font-size:34px;z-index:2"><a href="#" 
+	onclick="gotoHomeFromGame('t_cube_bottom')" class="lizard_float_button"><span  data-icon="&#xe009;"></span></a></div>
+		<canvas id="cv" width="400" height="400"></canvas>
+		<div id='fps' style="display:none">0&nbsp;fps</div>
+		<div id='divC'></div>
+	</div>
+</div>
+
+<div id="start" class="modalDialog">
+	<div class="centered w_h_400" style="text-align:center">
+		<h2>Jogo <span>Lagarto</span></h2>
+		<div class="normalB "><a href="#" style="background-color:brown" class="roundAnchor fs " 
+					onclick="startGame()" ><span  data-icon="&#xe00c;"></span></a><a href="#" class="roundAnchor roundAnchorSmall fs " 
+					onclick="gotoHome('t_cube_bottom')" ><span  data-icon="&#xe009;"></span></a></div>
+	</div>
+</div>
+
+<div id="end" class="modalDialog">
+	<div class="centered w_h_450" style="text-align:center">
+		<h2 id="pts">12 pts</h2>
+		<h2 id="position">Posição</h2>
+		<div class="normalB "><a href="#"  style="background-color:brown" class="roundAnchor fs" 
+					onclick="startGame()" ><span  data-icon="&#xe007;"></span></a><a href="#" class="roundAnchor roundAnchorSmall fs" 
+					onclick="showRegResult()" ><span  data-icon="&#xe008;"></span></a><a href="#" class="roundAnchor roundAnchorSmall fs" 
+					onclick="gotoHome('t_cube_bottom')" ><span  data-icon="&#xe009;"></span></a></div>
+	</div>
+</div>
+
+<div id="registerResult" class="modalDialog">
+	<div class="centered w_h_450" style="text-align:center">
+		<h2 id="pts_save">2 pts</h2>
+		<h2 id="position2">Posição</h2>
+		<div><label id="labelPlayer">nome:</label> <input class="inputLizard" id="player" maxlength="10" type="text"></div>
+		<div>
+				<div class="normalB ">
+					<a href="#" class="roundAnchor roundAnchorSmall fs" 
+					onclick="saveAndGoToResults()" ><span  data-icon="&#xe006;"></span></a>
+					<a href="#" class="roundAnchor roundAnchorSmall fs" 
+					onclick="cancelRegResult()" ><span  data-icon="&#xe011;"></span></a>
+				</div>
+		</div>
+
+	</div>
+</div>
+
+<script>
+	function checkPer(){
+		var txt=document.getElementById("enterB").innerHTML;
+		if(txt=="enter"){
+			var cod=document.getElementById("codEnter").value;
+			console.log(cod);
+			if(cod!="calabaza")
+				return;
+			window.clearTimeout(timeOut);
+			document.getElementById("codEnter").value="";
+			document.getElementById("tableConf").style.display="table";
+			document.getElementById("enterB").innerHTML="out";
+			document.getElementById("maxLizards").value=game.maxLizards;
+			document.getElementById("newSpeed").value=game.baseSpeed;
+			
+		}else{
+			document.getElementById("tableConf").style.display="none";
+			document.getElementById("tableCont").style.display="none";
+			document.getElementById("enterB").innerHTML="enter";
+		}
+	}
+	
+	function changeMaxLizards(){
+		var val=Number(document.getElementById("maxLizards").value);
+		if(!isNaN(val))
+			game.maxLizards=val;
+	}
+	
+	function resetResultados(){
+		game.results=[];
+		 game.lastResult=null;
+		game.lastResultPos=null;
+		writeToResults(game.getResults(),game.getLastResultPos(),game.getLastResultInfo());
+	}
+	
+	function changeSpeed(){
+		var val=Number(document.getElementById("newSpeed").value);
+		if(!isNaN(val) && val<=3 && val >=0)
+			game.baseSpeed=val;
+	}
+	
+	var timeOut;
+	function mostrarEnter(){
+		window.clearTimeout(timeOut);
+		document.getElementById("tableCont").style.display="table";
+		timeOut=setTimeout(hideConf,10000);
+	}
+	
+	function hideConf(){
+		document.getElementById("tableCont").style.display="none";
+	}
+</script>
+<div id="config" style="z-index:100;position:absolute;right:0px;bottom:0px;background-color:#024809">
+<div   onclick="mostrarEnter();"; style="position:absolute;left:-20px;top:-100px;width:20px;height:100px;"></div>
+<table id="tableCont" style="display:none;line-height: 0;border-spacing: 0px;" ><tr><td style="vertical-align:text-top;padding:0;margin:0">
+<table  id="tableEnter" style="line-height:0;border-spacing: 0px;">
+<tr>
+	<td><input id="codEnter" type="text" style="width:60px" maxlength="10"></td>
+</tr>
+<tr>
+	<td colspan="3"><button id="enterB" onclick="checkPer()">enter</button></td>
+</tr>
+</table>
+</td>
+<td>
+<table id="tableConf" style="display:none;line-height: 0;border-spacing: 0px;">
+<tr>
+	<td><input id="newSpeed" type="text" maxlength="3" style="width:40px"></td>
+	<td><button onclick="changeSpeed();">speed(0-3)</button></td>
+</tr>
+<tr>
+	<td><input id="maxLizards" type="text" maxlength="3" style="width:40px"></td>
+	<td><button onclick="changeMaxLizards();">num.lagartos</button></td>
+</tr>
+<tr>
+	<td></td>
+	<td ><button onclick="resetResultados();">reset Contagen</button></td>
+</tr>
+</table>
+</td></tr></table>
+
+</div>
+
+</body>
+</html>

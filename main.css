@@ -1,0 +1,58 @@
+	.centeredMain{
+		margin:0 auto;
+		margin: auto;
+		position: absolute;
+		top: 0; left: 0; bottom: 0; right: 0;
+		width:400px;
+		height:400px;
+		margin-top: 160px;
+	}
+	
+	.topC{
+		text-align:center;
+	}
+	
+	.bottomC{
+		text-align: center;
+		position: absolute;
+		bottom: 0px;
+		left: 0px;
+		right: 0px;
+	}
+	
+	.leftVC{
+		position: absolute;
+		top: 50%;
+	}
+	.rightVC{
+		position: absolute;
+		top: 50%;
+		right: 0%;
+	}
+	
+	.centerUp{
+		bottom:42px;
+	}
+	
+	.fs{
+		/*background-color:yellow;*/
+		display:inline-block;
+		position:relative;
+	}
+	
+	.nfs{
+		/*background-color:yellow;*/
+		display:compact;
+		position:absolute;
+	}
+	
+	
+		.normalB{
+		text-align: center;
+	}
+	
+	#codeBlock td{
+		border-width:0px;
+		padding:0;
+		margin:0;
+	}

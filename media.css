@@ -1,0 +1,16 @@
+
+.w_h_400 {
+	height: 350px;
+	width: 350px;
+}
+
+#cvMain{
+	height: 300px;
+	width: 300px;
+	left:25px;
+	top:25px;
+}
+
+.info{
+	font-size: 14px;
+}
